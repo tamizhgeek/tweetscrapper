@@ -13,6 +13,8 @@ from django.contrib.auth.decorators import login_required
 from google.appengine.api import users
 import os
 import oauth, oauth_details
+from django.utils import simplejson as json
+
 
 def login_required(func):
     def _wrapperfunc(request, *args, **kwargs):
@@ -82,7 +84,20 @@ def save_twitter_auth(request):
 
 @login_required
 def home(request):
-    return render_to_response("home.html", context_instance = RequestContext(request))
+    cur_user = get_user_info()
+    client = oauth.TwitterClient(oauth_details.consumer_key, oauth_details.consumer_secret, oauth_details.callback)
+    additional_params = {
+        'count': 199,
+        'screen_name':'azhaguselvan',
+        }
+    result = client.make_request(
+        "http://api.twitter.com/1/statuses/user_timeline.json",
+        token = cur_user.oauth_token,
+        secret = cur_user.oauth_secret,
+        additional_params = additional_params,
+        method = urlfetch.GET)
+    details = json.loads(result.content)[0]['user']
+    return render_to_response("home.html", {'info': details, }, context_instance = RequestContext(request))
 
     
 def thenticate(request):
@@ -100,6 +115,12 @@ def thenticate(request):
         additional_params=additional_params,
         method=urlfetch.POST)
 
+
+def get_user_info():
+    query = Users.all()
+    u = users.get_current_user()
+    cur_user = query.filter('user =', u).fetch(1)[0]
+    return cur_user
 
 def logout(request):
     
