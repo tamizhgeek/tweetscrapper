@@ -20,7 +20,8 @@ urlpatterns = patterns('',
                        (r'^save/$', 'scrapper.views.save_twitter_auth'),
                        (r'^home/$', 'scrapper.views.home'),
                        (r'^logout/$', 'scrapper.views.logout'),
-    # Example:
+                       (r'^download/$', 'scrapper.views.download'),
+   # Example:
     # (r'^foo/', include('foo.urls')),
 
     # Uncomment this for admin:

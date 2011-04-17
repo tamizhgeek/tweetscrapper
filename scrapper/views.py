@@ -1,6 +1,10 @@
 # Create your views here.
+import sys
 
+pdf_path = '/home/tamizhgeek/workspace/tweetscrapper/pyfpdf.zip'
+sys.path.insert(0, pdf_path)
 
+from pyfpdf import FPDF
 from django.http import HttpResponseRedirect, HttpResponse
 from django.shortcuts import render_to_response, get_object_or_404 
 #from django.core.context_processors import csrf                                                                            
@@ -45,7 +49,7 @@ def index(request):
                         'form': form,
                         }, context_instance=RequestContext(request))
         else:
-            return HttpResponseRedirect('/authenticate')
+            return HttpResponseRedirect('/home')
     else:
         return HttpResponseRedirect(users.create_login_url(reverse('scrapper.views.index')))
 
@@ -88,7 +92,7 @@ def home(request):
     client = oauth.TwitterClient(oauth_details.consumer_key, oauth_details.consumer_secret, oauth_details.callback)
     additional_params = {
         'count': 199,
-        'screen_name':'azhaguselvan',
+        'screen_name':cur_user.twitter_handle,
         }
     result = client.make_request(
         "http://api.twitter.com/1/statuses/user_timeline.json",
@@ -99,22 +103,24 @@ def home(request):
     details = json.loads(result.content)[0]['user']
     return render_to_response("home.html", {'info': details, }, context_instance = RequestContext(request))
 
-    
-def thenticate(request):
-    query = Users.all()
-    cur_user = query.filter('user =',  users.get_current_user()).fetch(1)[0]
+def download(request):
+    cur_user = get_user_info()
     client = oauth.TwitterClient(oauth_details.consumer_key, oauth_details.consumer_secret, oauth_details.callback)
     additional_params = {
-        'status': "Testing Twitter OAuth with Django and AppEngine",
+        'screen_name':cur_user.twitter_handle,
         }
-
     result = client.make_request(
-        "http://twitter.com/statuses/update.json",
-        token=cur_user.oauth_token,
-        secret=cur_user.oauth_secret,
-        additional_params=additional_params,
-        method=urlfetch.POST)
+        "http://api.twitter.com/1/statuses/user_timeline.json",
+        token = cur_user.oauth_token,
+        secret = cur_user.oauth_secret,
+        additional_params = additional_params,
+        method = urlfetch.GET)
+    details = json.loads(result.content)[0]['user']
+    
+    return render_to_response("home.html", {'info': details, }, context_instance = RequestContext(request))
 
+def showlist():
+    pass
 
 def get_user_info():
     query = Users.all()
