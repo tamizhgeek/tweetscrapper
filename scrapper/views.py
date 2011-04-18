@@ -31,26 +31,26 @@ def index(request):
     return render_to_response("index.html", {'info': details, }, context_instance = RequestContext(request))
     
 
-def scrap(request):
+def scrap(request, show_all = None):
     
     tf = TwitterInfo.objects.get(user = request.user)	
     consumer = oauth.Consumer(settings.KEY, settings.SECRET)
     token = oauth.Token(tf.token, tf.secret)
     client = oauth.Client(consumer, token)
-    resp, result = client.request(
-        "http://api.twitter.com/1/statuses/user_timeline.json?count=200",
-        body = 'count=200')
-    if json.loads(resp['status']) != 200:
-        exit()
-    else:
-        result = json.loads(result)
-        tweets = []
-        for entry in result:
-        
-            tweets.append(unicode(entry['text']))
-                          
-        request.session['tweets'] = tweets
-        return render_to_response("scrap.html", {'tweets': tweets, }, context_instance = RequestContext(request))
+    request.session['tweets'] = []
+    request.session['since_id'] = 0
+    if request.session['since_id']:
+        del request.session['since_id']
+    resp, res = get_tweets(request, client)
+    accumulate_tweets(request, res)
+    show_all = request.GET.get('show_all', None)
+    while show_all and len(request.session['tweets']) < request.session['total_count']:
+        resp, res = get_tweets(request, client)
+        accumulate_tweets(request, res)
+        continue
+    
+    return render_to_response("scrap.html", {'tweets': request.session['tweets'], }, context_instance = RequestContext(request))
+    
     
 def getpdf(request):
     response = HttpResponse(mimetype='application/pdf')
@@ -72,3 +72,27 @@ def getpdf(request):
     buf.close()
     response.write(pdf)
     return response
+
+def get_tweets(request, client):
+    
+    since_id = request.session['since_id']
+    if since_id == 0:
+        resp, res = client.request(
+            "http://api.twitter.com/1/statuses/user_timeline.json?count=200")
+    else:
+        resp, res = client.request(
+            "http://api.twitter.com/1/statuses/user_timeline.json?count=200&max_id=%d"%since_id)
+    
+    result = json.loads(res)
+    if json.loads(resp['status']) != 200:
+        
+        return HttpResponse("Something wrong happened with the twitter API")
+    request.session['total_count'] = result[0]['user']['statuses_count']
+    request.session['since_id'] = result[-1]['id']
+    return resp, result
+
+def accumulate_tweets(request, result):
+    
+    for entry in result:
+        request.session['tweets'].append(unicode(entry['text']))
+    print len(request.session['tweets'])
