@@ -19,7 +19,6 @@ class TwitterBackend(object):
             user     = User.objects.create_user(settings.USERS_FORMAT % username, email)
             user.save()
             info = TwitterInfo(user=user, name=username, id=twitter_id, token=token, secret=secret)
-	    print info
             info.save()
         return user
     
