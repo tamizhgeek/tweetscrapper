@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+{% block title %}Tweet Scrapper{% endblock %}
+
+{% block content %}
+<h1>Welcome {{ info.screen_name }}!</h1> 
+<img src="{{ info.profile_image_url }}"><br>
+<p>
+{{ info.description }}
+</p>
+</p>
+You have {{ info.statuses_count }} tweets till now, would you like to get them as a pdf file? ;)
+</p> 
+{% endblock %}
