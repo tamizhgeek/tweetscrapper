@@ -1,5 +1,5 @@
 # Django settings for tweetscrapper project.
-
+import os
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
@@ -12,7 +12,7 @@ MANAGERS = ADMINS
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3', # Add 'postgresql_psycopg2', 'postgresql', 'mysql', 'sqlite3' or 'oracle'.
-        'NAME': 'db',                      # Or path to database file if using sqlite3.
+        'NAME': os.path.join(os.path.dirname(__file__),'db'),
         'USER': '',                      # Not used with sqlite3.
         'PASSWORD': '',                  # Not used with sqlite3.
         'HOST': '',                      # Set to empty string for localhost. Not used with sqlite3.
@@ -112,6 +112,6 @@ LOGIN_REDIRECT_URL = '/index'
 
 LOGOUT_REDIRECT_URL = '/index'
 
-LOGIN_URL = '/home'
+LOGIN_URL = '/'
 
-LOGOUT_URL = '/home'
+LOGOUT_URL = '/'
