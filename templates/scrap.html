@@ -3,16 +3,17 @@
 
 {% block content %}
 <h1>Welcome {{ info.screen_name }}!</h1> 
-{% if {{tweets | length_is: "100" }} %}
+{% if not tweets|length > 100  %}
 Only 100 tweets are fetched now. 
-
- Get these as a pdf now? 
+{% endif %}
+ 
+Get these as a pdf now? 
 <a href="/getpdf">Yes</a>
 <br>
 Get all your tweets?
 <a href="/scrap?show_all=True">Click here!</a>
 
-</p>
+<p>
 Your tweets are here,
 <ul>
 {% for twt in tweets %}
