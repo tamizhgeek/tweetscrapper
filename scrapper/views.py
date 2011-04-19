@@ -30,7 +30,7 @@ def index(request):
     details = json.loads(resp)
     return render_to_response("index.html", {'info': details, }, context_instance = RequestContext(request))
     
-
+@login_required
 def scrap(request, show_all = None):
     
     tf = TwitterInfo.objects.get(user = request.user)	
@@ -41,6 +41,7 @@ def scrap(request, show_all = None):
     request.session['since_id'] = 0
     if request.session['since_id']:
         del request.session['since_id']
+        del request.session['tweets']
     resp, res = get_tweets(request, client)
     accumulate_tweets(request, res)
     show_all = request.GET.get('show_all', None)
@@ -51,7 +52,7 @@ def scrap(request, show_all = None):
     
     return render_to_response("scrap.html", {'tweets': request.session['tweets'], }, context_instance = RequestContext(request))
     
-    
+@login_required    
 def getpdf(request):
     response = HttpResponse(mimetype='application/pdf')
     response['Content-Disposition'] = 'attachment; filename=%s.pdf'%request.user.username
@@ -82,8 +83,10 @@ def get_tweets(request, client):
     else:
         resp, res = client.request(
             "http://api.twitter.com/1/statuses/user_timeline.json?count=200&max_id=%d"%since_id)
-    
-    result = json.loads(res)
+    try:
+        result = json.loads(res)
+    except:
+        return HttpResponse("Something wrong happened with the application. <a href="/">Try again</a>")
     if json.loads(resp['status']) != 200:
         
         return HttpResponse("Something wrong happened with the twitter API")
