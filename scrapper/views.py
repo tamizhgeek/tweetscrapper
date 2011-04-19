@@ -79,10 +79,10 @@ def get_tweets(request, client):
     since_id = request.session['since_id']
     if since_id == 0:
         resp, res = client.request(
-            "http://api.twitter.com/1/statuses/user_timeline.json?count=200")
+            "http://api.twitter.com/1/statuses/user_timeline.json?count=100")
     else:
         resp, res = client.request(
-            "http://api.twitter.com/1/statuses/user_timeline.json?count=200&max_id=%d"%since_id)
+            "http://api.twitter.com/1/statuses/user_timeline.json?count=100&max_id=%d"%since_id)
     try:
         result = json.loads(res)
     except:
