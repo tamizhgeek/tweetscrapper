@@ -86,7 +86,7 @@ def get_tweets(request, client):
     try:
         result = json.loads(res)
     except:
-        return HttpResponse("Something wrong happened with the application. <a href="/">Try again</a>")
+        return HttpResponse("Something wrong happened with the application. <a href='/'>Try again</a>")
     if json.loads(resp['status']) != 200:
         
         return HttpResponse("Something wrong happened with the twitter API")
