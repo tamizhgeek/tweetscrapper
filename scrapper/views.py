@@ -62,12 +62,18 @@ def getpdf(request):
                         rightMargin=72,leftMargin=72,
                         topMargin=72,bottomMargin=18)
     styles=getSampleStyleSheet()
-    
+    from reportlab.pdfbase import pdfmetrics,ttfonts
+    import os
+    #pdfmetrics.findFontAndRegister(ttfonts.TTFont('LinLibertine_Bd', "/home/tamizhgeek/virtualenvs/tweetscrapper/lib/python2.6/site-packages/reportlab-2.5-py2.6-linux-i686.egg/reportlab/fonts/LinLibertine_Bd.ttf"))
+    pdfmetrics.registerFont(ttfonts.TTFont('TAM', os.path.join(os.path.dirname('..'), 'TSCu_Paranar.ttf'))) 
+    styles.add(ParagraphStyle(name='TestStyle',fontName='TAM',
+                              fontSize=12,
+                              leading=12)) 
     text = ""
     Story = []
     tweets = request.session['tweets']
     for tw in tweets:
-        Story.append(Paragraph(unicode(tw), styles['Normal']))
+        Story.append(Paragraph(tw, styles['TestStyle']))
     doc.build(Story)
     pdf = buf.getvalue()
     buf.close()
