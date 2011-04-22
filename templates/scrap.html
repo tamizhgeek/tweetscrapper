@@ -2,20 +2,30 @@
 {% block title %}Tweet Scrapper{% endblock %}
 
 {% block content %}
+<script type="text/javascript" charset="utf-8">
+
+function my_js_callback(data){
+  if(data==Dajaxice.EXCEPTION){
+    alert('Error! Something happens!');
+  }
+  else{
+    location.reload(true);
+  }
+}
+</script>
+
 <h1>Welcome {{ info.screen_name }}!</h1> 
-{% if not tweets|length > 100  %}
-Only 100 tweets are fetched now. 
-{% endif %}
- 
+
+
+{% if tweets %}
+
+
 Get these as a pdf now? 
 <a href="/getpdf">Yes</a>
 <br>
-Get all your tweets?
-<a href="/scrap?show_all=True">Click here!</a>
-
 <p>
 Your tweets are here,
-<ul>
+<ul id="tweet-display">
 {% for twt in tweets %}
 
 <li>
@@ -23,5 +33,14 @@ Your tweets are here,
 </li>
 {% endfor %}
 </ul>
+
+{% else %}
+<p> 
+<button onclick="Dajaxice.scrapper.scrap_ajax(my_js_callback);">Click here </button> and WAIT! While we fetch your tweets, 
+</p>
+
+{% endif %} 
 </p> 
+
+
 {% endblock %}

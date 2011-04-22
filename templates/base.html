@@ -1,3 +1,5 @@
+{% load dajaxice_templatetags %}
+
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN">
 <html lang="en">
 <head>
@@ -118,6 +120,7 @@ font-weight: bold;
 
 </style>
     <title>{% block title %}{% endblock %}</title>
+{% dajaxice_js_import %}
 
 </head>
 <body>
