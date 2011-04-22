@@ -2,10 +2,6 @@ from django.utils import simplejson
 from dajaxice.core import dajaxice_functions
 from scrapper.views import *
 
-def ajax_reply(request):
-    return simplejson.dumps({'message':'Hello World'})
-
-
 
 def scrap_ajax(request, show_all = None):
     print 1
@@ -71,4 +67,3 @@ def accumulate_tweets(request, result):
 
 
 dajaxice_functions.register(scrap_ajax)
-dajaxice_functions.register(ajax_reply)
