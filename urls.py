@@ -3,6 +3,9 @@ from scrapper.views import *
 # Uncomment the next two lines to enable the admin:
 from django.contrib import admin
 admin.autodiscover()
+from dajaxice.core import dajaxice_autodiscover
+dajaxice_autodiscover()
+from django.conf import settings
 
 urlpatterns = patterns('',
     # Example:
@@ -18,4 +21,6 @@ urlpatterns = patterns('',
 			(r'^index/', index),
                        	(r'^scrap/', scrap),
                        	(r'^getpdf/', getpdf),
+                       (r'^%s/' % settings.DAJAXICE_MEDIA_PREFIX, include('dajaxice.urls')),
+
 )
