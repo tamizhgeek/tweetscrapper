@@ -64,7 +64,7 @@ SECRET_KEY = 'i2s7f!jn%u-5%48&0o*+skh&pz7#ub*-j_#!i+=+#pd!==pc+w'
 TEMPLATE_LOADERS = (
     'django.template.loaders.filesystem.Loader',
     'django.template.loaders.app_directories.Loader',
-#     'django.template.loaders.eggs.Loader',
+     'django.template.loaders.eggs.Loader',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -97,7 +97,11 @@ INSTALLED_APPS = (
     # 'django.contrib.admindocs',
     'scrapper',
     'twitter_users',
+    'dajaxice',
 )
+
+DAJAXICE_MEDIA_PREFIX="dajaxice"
+
 
 TWITTER_KEY = "k4GPHakWl2uv51QlxB81dw"
 
