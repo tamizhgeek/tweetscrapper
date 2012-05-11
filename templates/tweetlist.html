@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% block title %}Tweet Scrapper{% endblock %}
+<style>
+
+@font-face {
+   font-family: TABUni-Tamil021;
+   src: url(TABUni-Tamil021.ttf);
+}
+
+</style>
+
+{% block content %}
+
+{% if tweets %}
+
+<ul>
+{% for tw in tweets %}
+
+<li>{{tw}}</li>
+<hr>
+{% endfor %}
+
+</ul>
+
+{% endif %}
+{% endblock %}
+

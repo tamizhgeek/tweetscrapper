@@ -9,11 +9,14 @@ import oauth2 as oauth
 from django.utils import simplejson as json
 #from reportlab.lib.pagesizes import letter
 from reportlab.pdfgen import canvas
-import cStringIO  
+import cStringIO 
 from reportlab.lib.pagesizes import letter
 from reportlab.platypus import SimpleDocTemplate, Paragraph, Spacer
 from reportlab.lib.styles import getSampleStyleSheet, ParagraphStyle
 from time import sleep
+from django.template.loader import render_to_string
+#import ho.pisa as pisa
+
 
 def home(request):
     if request.user.is_authenticated():
@@ -41,26 +44,18 @@ def scrap(request, show_all = None):
 def getpdf(request):
     response = HttpResponse(mimetype='application/pdf')
     response['Content-Disposition'] = 'attachment; filename=%s.pdf'%request.user.username
-
+    
+    html = render_to_string('tweetlist.html', {'tweets': request.session['tweets']})
+    
     buf = cStringIO.StringIO()
-    doc = SimpleDocTemplate(buf,pagesize=letter,
-                        rightMargin=72,leftMargin=72,
-                        topMargin=72,bottomMargin=18)
-    styles=getSampleStyleSheet()
-    from reportlab.pdfbase import pdfmetrics,ttfonts
-    import os
-    #pdfmetrics.findFontAndRegister(ttfonts.TTFont('LinLibertine_Bd', "/home/tamizhgeek/virtualenvs/tweetscrapper/lib/python2.6/site-packages/reportlab-2.5-py2.6-linux-i686.egg/reportlab/fonts/LinLibertine_Bd.ttf"))
-    pdfmetrics.registerFont(ttfonts.TTFont('TAM', os.path.join(os.path.dirname('..'), 'TSCu_Paranar.ttf'))) 
-    styles.add(ParagraphStyle(name='TestStyle',fontName='TAM',
-                              fontSize=12,
-                              leading=12)) 
-    text = ""
-    Story = []
-    tweets = request.session['tweets']
-    for tw in tweets:
-        Story.append(Paragraph(tw, styles['TestStyle']))
-    doc.build(Story)
-    pdf = buf.getvalue()
+    
+    pdf = pisa.pisaDocument(cStringIO.StringIO(
+        html.encode("utf-8")), buf)
+    #if not pdf.err:
+     #   return HttpResponse(buf.getvalue(), \
+      #                               mimetype='application/pdf')
+    pdf = buf.getvalue() 
+
     buf.close()
     response.write(pdf)
     return response

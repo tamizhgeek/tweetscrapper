@@ -1,143 +1,63 @@
 {% load dajaxice_templatetags %}
 
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN">
+<!DOCTYPE HTML>
 <html lang="en">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<style>
-body {
- margin: 0;
- padding: 0;
- font-family: Georgia, Times, "Times New Roman", serif;
- color: black;
- width: 100%;
-height: 100%;
- border-right: 1px solid black;
-margin-bottom: 2em;
-  background:                     #fff;
-}
+<link type="text/css" href="/media/bootstrap/css/bootstrap.css" rel="stylesheet" />
+<link type="text/css" href="/media/bootstrap/css/bootstrap-responsive.css" rel="stylesheet" />
 
-h1, h2, h3, h4, h5, h6 {
-        color: #454c45;
-
-}
-a:hover {
-        color:  #9a9;
-}
-
-.header {
-        text-align:                     center;
-        background:                     #ffe;
-        border-bottom:          1px solid #9a9;
-        margin-top:                     0em;
-        margin-bottom: 0em;
-}
-
-.header a{
-        text-decoration:        none;
-        color: #454c45;
-}
-
-.header a:hover {
-        color: #454c45;
-}
-
-.header h1 {
-        margin-top:             0;
-        padding-top:    .3em;
-        margin-bottom:  0;
-        font-size: 270%;
-}
-
-.header h3 {
-        font-style:                     italic;
-        margin-top:                     0;
-        margin-left:            14em;
-        color:                          #9a9;
-}
-
-
-#menu {
-        margin-top:                     1em;
-        text-align:                     center;
-}
-
-#menu a{
-        padding:                        0em 2em;
-        text-decoration:        none;
-        background-color:       #ffd;
-        color: #454c45;
-        font-weight:            bold;
-}
-
-
-#menu a:hover {
-        background-color:       #acbfac;
-        color: #454c45;}
-
-#attr
-{
-font-size: 60%;
-}
-.content {
-
-        border:                         0px solid #9a9;
-        padding:                        2em;
-        width:                          85%;
-        margin:                         0 auto;
-        clear:                          both;
-}
-
-
-input {
- background-color: #ffb;
-margin: 1em;
-}
-
-label {
-  font-size: 100%;
-}
-
-
-
-form {
- border: 1px solid #666699;
- padding: 5px;
-font-family: Verdana, Arial, Helvetica, sans-serif;
- font-size: 10px;
- text-align: left;
-font-size: 100%;
-}
-
-.highlight
-{
-padding-top: 0;
-        padding-bottom: 0;
-        background-color: #dae6da;
-
-font-weight: bold;
-}
-
-</style>
-    <title>{% block title %}{% endblock %}</title>
+<title>{% block title %}{% endblock %}</title>
 {% dajaxice_js_import %}
-
 </head>
+
 <body>
-<div class="header">    <h1><a href="/">Tweet Scrapper</a> </h1><h3>Scrap n Archive your Tweets!</h3>
+<div class="navbar navbar-fixed-top">
+  <div class="navbar-inner">
+    <div class="container">
+      <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </a>
+      <a class="brand" href="/">TweetScrapper</a>
+      <div class="nav-collapse">
+        <ul class="nav">
+          <li class="active"><a href="/">Home</a></li>
+          <li><a href="/about">About</a></li>
+	            
+	   <li class="offset8"> <a href="/twitter/logout">Logout</a>
+		    </li>
+	</ul>
+	
+      </div><!--/.nav-collapse -->
+    </div>
+  </div>
+</div>
+<br>
+<br>
+<br>
+<br>
+<div class="container">
+  <h1 class="offset4">Tweet Scrapper</h1>
+  <h3 class="offset5">Scrap n Archive your Tweets!</h3>
 
-</div>
-<br>
-<br>
-<div class="content">   {% block content %}{% endblock %}
-</div>
-<div class="footer">
-<div id="menu">
+<div class="content well">   
     
-<div id="attr">Design inspired by <a href="http://www.pycontest.net/">www.pycontest.net</a> | <a href="/twitter/logout">Logout </a>
-| <a href="http://bitbucket.org/tamizhgeek/tweetscrapper">Code</a>
-<br></div>
-</div></div>
-
+  {% block content %}{% endblock %}
+    
+</div>
+</div>
+<hr>
+<div class="footer row">
+  <div class="offset1">
+    
+    Developed with twitter bootstrap
+    <br>
+    <a href="http://bitbucket.org/tamizhgeek/tweetscrapper">Code</a> is here!
+      
+    </div>
+  </div>
+</div>
 </body>
 </html>

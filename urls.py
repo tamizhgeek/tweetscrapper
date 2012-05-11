@@ -23,4 +23,12 @@ urlpatterns = patterns('',
                        	(r'^getpdf/', getpdf),
                        (r'^%s/' % settings.DAJAXICE_MEDIA_PREFIX, include('dajaxice.urls')),
 
+                       
 )
+
+
+if settings.DEBUG:
+    urlpatterns += patterns('',
+        (r'^media/(?P<path>.*)$', 'django.views.static.serve',  
+         {'document_root':     settings.MEDIA_ROOT}),
+    )
