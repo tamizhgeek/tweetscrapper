@@ -24,14 +24,21 @@ def home(request):
     else:
         return render_to_response("home.html", context_instance=RequestContext(request))
 
+def about(request):
+    return render_to_response("about.html", context_instance=RequestContext(request))
+
 @login_required
 def index(request):
     tf = TwitterInfo.objects.get(user = request.user)	
     consumer = oauth.Consumer(settings.KEY, settings.SECRET)
     client = oauth.Client(consumer)
     status, resp = client.request('http://api.twitter.com/1/users/show.json?user_id='+str(tf.id))
+    if status['status'] != '200':
+        success = False
+    else:
+        success = True
     details = json.loads(resp)
-    return render_to_response("index.html", {'info': details, }, context_instance = RequestContext(request))
+    return render_to_response("index.html", {'info': details, 'result' : success}, context_instance = RequestContext(request))
     
 @login_required
 def scrap(request, show_all = None):

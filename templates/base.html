@@ -24,10 +24,12 @@
       <div class="nav-collapse">
         <ul class="nav">
           <li class="active"><a href="/">Home</a></li>
-          <li><a href="/about">About</a></li>
-	            
-	   <li class="offset8"> <a href="/twitter/logout">Logout</a>
+          <li><a href="/about">About</a>   </li>
+
+	        {% if user.is_authenticated %}    
+	        <li class="offset8"> <a href="/twitter/logout">Logout</a>
 		    </li>
+            {% endif %}
 	</ul>
 	
       </div><!--/.nav-collapse -->
