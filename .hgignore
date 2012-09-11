@@ -1,7 +1,5 @@
 syntax:glob
-*~
+settings.py
+oauth_details.py
 *pyc
-Makefile
-
-syntax: regexp
-(.*/)?\#[^/]*\#$
+*~
