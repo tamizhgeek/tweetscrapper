@@ -1,0 +1,174 @@
+ERROR Traceback from /fetch_tweets/
+Traceback (most recent call last):
+  File "/home/azhagu/virtualenvs/tweetscrapper/local/lib/python2.7/site-packages/Django-1.4-py2.7.egg/django/core/handlers/base.py", line 111, in get_response
+    response = callback(request, *callback_args, **callback_kwargs)
+  File "/home/azhagu/virtualenvs/tweetscrapper/local/lib/python2.7/site-packages/Django-1.4-py2.7.egg/django/contrib/auth/decorators.py", line 20, in _wrapped_view
+    return view_func(request, *args, **kwargs)
+  File "/home/azhagu/workspace/tweetscrapper/../tweetscrapper/scrapper/views.py", line 51, in fetch_tweets
+    tweets, since_id = tf.get_tweets(oauth_client, since_id)
+  File "/home/azhagu/workspace/tweetscrapper/twitter_users/models.py", line 38, in get_tweets
+    since_id = result[-1]['id']
+UnboundLocalError: local variable 'result' referenced before assignment
+
+ERROR Traceback from /fetch_tweets/
+Traceback (most recent call last):
+  File "/home/azhagu/virtualenvs/tweetscrapper/local/lib/python2.7/site-packages/Django-1.4-py2.7.egg/django/core/handlers/base.py", line 111, in get_response
+    response = callback(request, *callback_args, **callback_kwargs)
+  File "/home/azhagu/virtualenvs/tweetscrapper/local/lib/python2.7/site-packages/Django-1.4-py2.7.egg/django/contrib/auth/decorators.py", line 20, in _wrapped_view
+    return view_func(request, *args, **kwargs)
+  File "/home/azhagu/workspace/tweetscrapper/../tweetscrapper/scrapper/views.py", line 51, in fetch_tweets
+    tweets, since_id = tf.get_tweets(oauth_client, since_id)
+  File "/home/azhagu/workspace/tweetscrapper/twitter_users/models.py", line 39, in get_tweets
+    result = accumulate_tweets(result)
+NameError: global name 'accumulate_tweets' is not defined
+
+ERROR Traceback from /fetch_tweets/
+Traceback (most recent call last):
+  File "/home/azhagu/virtualenvs/tweetscrapper/local/lib/python2.7/site-packages/Django-1.4-py2.7.egg/django/core/handlers/base.py", line 111, in get_response
+    response = callback(request, *callback_args, **callback_kwargs)
+  File "/home/azhagu/virtualenvs/tweetscrapper/local/lib/python2.7/site-packages/Django-1.4-py2.7.egg/django/contrib/auth/decorators.py", line 20, in _wrapped_view
+    return view_func(request, *args, **kwargs)
+  File "/home/azhagu/workspace/tweetscrapper/../tweetscrapper/scrapper/views.py", line 51, in fetch_tweets
+    tweets, since_id = tf.get_tweets(oauth_client, since_id)
+  File "/home/azhagu/workspace/tweetscrapper/twitter_users/models.py", line 35, in get_tweets
+    since_id = result[-1]['id']
+UnboundLocalError: local variable 'result' referenced before assignment
+
+ERROR Traceback from /fetch_tweets/
+Traceback (most recent call last):
+  File "/home/azhagu/virtualenvs/tweetscrapper/local/lib/python2.7/site-packages/Django-1.4-py2.7.egg/django/core/handlers/base.py", line 111, in get_response
+    response = callback(request, *callback_args, **callback_kwargs)
+  File "/home/azhagu/virtualenvs/tweetscrapper/local/lib/python2.7/site-packages/Django-1.4-py2.7.egg/django/contrib/auth/decorators.py", line 20, in _wrapped_view
+    return view_func(request, *args, **kwargs)
+  File "/home/azhagu/workspace/tweetscrapper/../tweetscrapper/scrapper/views.py", line 51, in fetch_tweets
+    tweets, since_id = tf.get_tweets(oauth_client, since_id)
+  File "/home/azhagu/workspace/tweetscrapper/twitter_users/models.py", line 35, in get_tweets
+    since_id = res[-1]['id']
+TypeError: string indices must be integers, not str
+
+ERROR Traceback from /fetch_tweets/
+Traceback (most recent call last):
+  File "/home/azhagu/virtualenvs/tweetscrapper/local/lib/python2.7/site-packages/Django-1.4-py2.7.egg/django/core/handlers/base.py", line 111, in get_response
+    response = callback(request, *callback_args, **callback_kwargs)
+  File "/home/azhagu/virtualenvs/tweetscrapper/local/lib/python2.7/site-packages/Django-1.4-py2.7.egg/django/contrib/auth/decorators.py", line 20, in _wrapped_view
+    return view_func(request, *args, **kwargs)
+  File "/home/azhagu/workspace/tweetscrapper/../tweetscrapper/scrapper/views.py", line 53, in fetch_tweets
+    return HttpResponse(json.loads(tweets))
+  File "/usr/lib/python2.7/json/__init__.py", line 326, in loads
+    return _default_decoder.decode(s)
+  File "/usr/lib/python2.7/json/decoder.py", line 366, in decode
+    obj, end = self.raw_decode(s, idx=_w(s, 0).end())
+TypeError: expected string or buffer
+
+ERROR Traceback from /getpdf/
+Traceback (most recent call last):
+  File "/home/azhagu/virtualenvs/tweetscrapper/local/lib/python2.7/site-packages/Django-1.4-py2.7.egg/django/core/handlers/base.py", line 111, in get_response
+    response = callback(request, *callback_args, **callback_kwargs)
+  File "/home/azhagu/virtualenvs/tweetscrapper/local/lib/python2.7/site-packages/Django-1.4-py2.7.egg/django/contrib/auth/decorators.py", line 20, in _wrapped_view
+    return view_func(request, *args, **kwargs)
+  File "/home/azhagu/workspace/tweetscrapper/../tweetscrapper/scrapper/views.py", line 60, in getpdf
+    html = render_to_string('tweetlist.html', {'tweets': request.session['tweets']})
+  File "/home/azhagu/virtualenvs/tweetscrapper/local/lib/python2.7/site-packages/Django-1.4-py2.7.egg/django/contrib/sessions/backends/base.py", line 39, in __getitem__
+    return self._session[key]
+KeyError: 'tweets'
+
+ERROR Traceback from /fetch_tweets/
+Traceback (most recent call last):
+  File "/home/azhagu/virtualenvs/tweetscrapper/local/lib/python2.7/site-packages/Django-1.4-py2.7.egg/django/core/handlers/base.py", line 111, in get_response
+    response = callback(request, *callback_args, **callback_kwargs)
+  File "/home/azhagu/virtualenvs/tweetscrapper/local/lib/python2.7/site-packages/Django-1.4-py2.7.egg/django/contrib/auth/decorators.py", line 20, in _wrapped_view
+    return view_func(request, *args, **kwargs)
+  File "/home/azhagu/workspace/tweetscrapper/../tweetscrapper/scrapper/views.py", line 51, in fetch_tweets
+    tweets, since_id = tf.get_tweets(oauth_client, since_id)
+  File "/home/azhagu/workspace/tweetscrapper/twitter_users/models.py", line 36, in get_tweets
+    since_id = res[-1][1]
+KeyError: 1
+
+ERROR Traceback from /fetch_tweets/
+Traceback (most recent call last):
+  File "/home/azhagu/virtualenvs/tweetscrapper/local/lib/python2.7/site-packages/Django-1.4-py2.7.egg/django/core/handlers/base.py", line 111, in get_response
+    response = callback(request, *callback_args, **callback_kwargs)
+  File "/home/azhagu/virtualenvs/tweetscrapper/local/lib/python2.7/site-packages/Django-1.4-py2.7.egg/django/contrib/auth/decorators.py", line 20, in _wrapped_view
+    return view_func(request, *args, **kwargs)
+  File "/home/azhagu/workspace/tweetscrapper/../tweetscrapper/scrapper/views.py", line 51, in fetch_tweets
+    tweets, since_id = tf.get_tweets(oauth_client, since_id)
+  File "/home/azhagu/workspace/tweetscrapper/twitter_users/models.py", line 36, in get_tweets
+    since_id = res[-1][1]
+KeyError: 1
+
+ERROR Traceback from /fetch_tweets/
+Traceback (most recent call last):
+  File "/home/azhagu/virtualenvs/tweetscrapper/local/lib/python2.7/site-packages/Django-1.4-py2.7.egg/django/core/handlers/base.py", line 111, in get_response
+    response = callback(request, *callback_args, **callback_kwargs)
+  File "/home/azhagu/virtualenvs/tweetscrapper/local/lib/python2.7/site-packages/Django-1.4-py2.7.egg/django/contrib/auth/decorators.py", line 20, in _wrapped_view
+    return view_func(request, *args, **kwargs)
+  File "/home/azhagu/workspace/tweetscrapper/../tweetscrapper/scrapper/views.py", line 51, in fetch_tweets
+    tweets, since_id = tf.get_tweets(oauth_client, since_id)
+  File "/home/azhagu/workspace/tweetscrapper/twitter_users/models.py", line 36, in get_tweets
+    since_id = res[-1]['tweet_id']
+KeyError: 'tweet_id'
+
+ERROR Traceback from /fetch_tweets/
+Traceback (most recent call last):
+  File "/home/azhagu/virtualenvs/tweetscrapper/local/lib/python2.7/site-packages/Django-1.4-py2.7.egg/django/core/handlers/base.py", line 111, in get_response
+    response = callback(request, *callback_args, **callback_kwargs)
+  File "/home/azhagu/virtualenvs/tweetscrapper/local/lib/python2.7/site-packages/Django-1.4-py2.7.egg/django/contrib/auth/decorators.py", line 20, in _wrapped_view
+    return view_func(request, *args, **kwargs)
+  File "/home/azhagu/workspace/tweetscrapper/../tweetscrapper/scrapper/views.py", line 51, in fetch_tweets
+    tweets, since_id = tf.get_tweets(oauth_client, since_id)
+  File "/home/azhagu/workspace/tweetscrapper/twitter_users/models.py", line 36, in get_tweets
+    since_id = res[-1]['tweet_id']
+KeyError: 'tweet_id'
+
+ERROR Traceback from /fetch_tweets/
+Traceback (most recent call last):
+  File "/home/azhagu/virtualenvs/tweetscrapper/local/lib/python2.7/site-packages/Django-1.4-py2.7.egg/django/core/handlers/base.py", line 111, in get_response
+    response = callback(request, *callback_args, **callback_kwargs)
+  File "/home/azhagu/virtualenvs/tweetscrapper/local/lib/python2.7/site-packages/Django-1.4-py2.7.egg/django/contrib/auth/decorators.py", line 20, in _wrapped_view
+    return view_func(request, *args, **kwargs)
+  File "/home/azhagu/workspace/tweetscrapper/../tweetscrapper/scrapper/views.py", line 51, in fetch_tweets
+    tweets, since_id = tf.get_tweets(oauth_client, since_id)
+  File "/home/azhagu/workspace/tweetscrapper/twitter_users/models.py", line 36, in get_tweets
+    since_id = res[-1]['tweet_id']
+KeyError: 'tweet_id'
+
+ERROR Traceback from /fetch_tweets/
+Traceback (most recent call last):
+  File "/home/azhagu/virtualenvs/tweetscrapper/local/lib/python2.7/site-packages/Django-1.4-py2.7.egg/django/core/handlers/base.py", line 111, in get_response
+    response = callback(request, *callback_args, **callback_kwargs)
+  File "/home/azhagu/virtualenvs/tweetscrapper/local/lib/python2.7/site-packages/Django-1.4-py2.7.egg/django/contrib/auth/decorators.py", line 20, in _wrapped_view
+    return view_func(request, *args, **kwargs)
+  File "/home/azhagu/workspace/tweetscrapper/../tweetscrapper/scrapper/views.py", line 51, in fetch_tweets
+    tweets, since_id = tf.get_tweets(oauth_client, since_id)
+  File "/home/azhagu/workspace/tweetscrapper/twitter_users/models.py", line 36, in get_tweets
+    since_id = res[-1]['tweet_id']
+KeyError: 'tweet_id'
+
+ERROR Traceback from /fetch_tweets/
+Traceback (most recent call last):
+  File "/home/azhagu/virtualenvs/tweetscrapper/local/lib/python2.7/site-packages/Django-1.4-py2.7.egg/django/core/handlers/base.py", line 111, in get_response
+    response = callback(request, *callback_args, **callback_kwargs)
+  File "/home/azhagu/virtualenvs/tweetscrapper/local/lib/python2.7/site-packages/Django-1.4-py2.7.egg/django/contrib/auth/decorators.py", line 20, in _wrapped_view
+    return view_func(request, *args, **kwargs)
+  File "/home/azhagu/workspace/tweetscrapper/../tweetscrapper/scrapper/views.py", line 51, in fetch_tweets
+    tweets, since_id = tf.get_tweets(oauth_client, since_id)
+  File "/home/azhagu/workspace/tweetscrapper/twitter_users/models.py", line 38, in get_tweets
+    result = self.accumulate_tweets(res)
+  File "/home/azhagu/workspace/tweetscrapper/twitter_users/models.py", line 45, in accumulate_tweets
+    result[i] = { text : unicode(entry['text']), tweet_id : entry['id']}
+NameError: global name 'text' is not defined
+
+ERROR Traceback from /fetch_tweets/
+Traceback (most recent call last):
+  File "/home/azhagu/virtualenvs/tweetscrapper/local/lib/python2.7/site-packages/Django-1.4-py2.7.egg/django/core/handlers/base.py", line 111, in get_response
+    response = callback(request, *callback_args, **callback_kwargs)
+  File "/home/azhagu/virtualenvs/tweetscrapper/local/lib/python2.7/site-packages/Django-1.4-py2.7.egg/django/contrib/auth/decorators.py", line 20, in _wrapped_view
+    return view_func(request, *args, **kwargs)
+  File "/home/azhagu/workspace/tweetscrapper/../tweetscrapper/scrapper/views.py", line 51, in fetch_tweets
+    tweets, since_id = tf.get_tweets(oauth_client, since_id)
+  File "/home/azhagu/workspace/tweetscrapper/twitter_users/models.py", line 38, in get_tweets
+    result = self.accumulate_tweets(res)
+  File "/home/azhagu/workspace/tweetscrapper/twitter_users/models.py", line 45, in accumulate_tweets
+    result[i] = { text : unicode(entry['text']), tweet_id : entry['id']}
+NameError: global name 'text' is not defined
+

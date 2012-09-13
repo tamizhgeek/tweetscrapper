@@ -15,7 +15,9 @@ from reportlab.platypus import SimpleDocTemplate, Paragraph, Spacer
 from reportlab.lib.styles import getSampleStyleSheet, ParagraphStyle
 from time import sleep
 from django.template.loader import render_to_string
-#import ho.pisa as pisa
+import logging
+
+logger = logging.getLogger("django.request")
 
 
 def home(request):
@@ -30,23 +32,26 @@ def about(request):
 @login_required
 def index(request):
     tf = TwitterInfo.objects.get(user = request.user)	
-    consumer = oauth.Consumer(settings.KEY, settings.SECRET)
-    client = oauth.Client(consumer)
+    client = tf.initialise_oauth_client()
     status, resp = client.request('http://api.twitter.com/1/users/show.json?user_id='+str(tf.id))
     if status['status'] != '200':
         success = False
+        logger.error("Twitter is behaving badly!")
+        logger.error(status)
     else:
         success = True
     details = json.loads(resp)
     return render_to_response("index.html", {'info': details, 'result' : success}, context_instance = RequestContext(request))
     
 @login_required
-def scrap(request, show_all = None):
-    if request.session.has_key('tweets'):
-        return render_to_response("scrap.html", {'tweets' : request.session['tweets'], }, context_instance = RequestContext(request))
-    else:
-        return render_to_response("scrap.html", context_instance = RequestContext(request))
-    
+def fetch_tweets(request):
+    tf = TwitterInfo.objects.get(user = request.user)
+    oauth_client = tf.initialise_oauth_client()
+    since_id  = request.session.get('last_tweet_id', 0)
+    tweets, since_id = tf.get_tweets(oauth_client, since_id)
+    request.session['last_tweet_id'] = since_id
+    return HttpResponse(json.dumps(tweets), mimetype="application/json")
+
 @login_required    
 def getpdf(request):
     response = HttpResponse(mimetype='application/pdf')

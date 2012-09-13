@@ -6,9 +6,7 @@ from scrapper.views import *
 def scrap_ajax(request, show_all = None):
     print 1
     tf = TwitterInfo.objects.get(user = request.user)	
-    consumer = oauth.Consumer(settings.KEY, settings.SECRET)
-    token = oauth.Token(tf.token, tf.secret)
-    client = oauth.Client(consumer, token)
+    client = tf.initialise_oauth_client()
     request.session['tweets'] = []
     # Delete the previosly set session values, if they still exist
     if request.session.get('since_id', False):

@@ -11,15 +11,31 @@
 
 <h1>Welcome {{ info.screen_name }}!</h1> 
 <img src="{{ info.profile_image_url }}"><br>
+<div class="row-fluid">
+<div id="profileinfo" class="span8">
 <p>
 {{ info.description }}
 </p>
+<p>
+You have {{ info.statuses_count }} tweets till now!
+But very sorry twitter allows us to fetch only the latest 3200 tweets of yours!
 </p>
-You have {{ info.statuses_count }} tweets till now, would you like to get them as a pdf file? ;)
-<a href="/scrap">Yes</a>
+</div>
+
+<div id="functionbar" class="span4">
+<a href="/getpdf" class="btn btn-large btn-primary" id="pdfbutton">Export as pdf</a>
+</div>
+</div>
+<br>
+<br>
+<table class="table table-bordered" id="tweetslist">
+
+</table>
 <br>
 <br>
 <br>
+<a href="#" class="btn btn-large btn-primary" id="tweetsbutton">Click here to see your tweets</a> &nbsp;&nbsp;
+<img src="/media/images/spinner.gif" id="tweetspinnertop" style="display:none">
 {% else %}
 <h1> Sorry twitter is behaving badly at the moment. Try again later.
 {% endif %}
