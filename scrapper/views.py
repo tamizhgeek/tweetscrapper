@@ -47,9 +47,8 @@ def index(request):
 def fetch_tweets(request):
     tf = TwitterInfo.objects.get(user = request.user)
     oauth_client = tf.initialise_oauth_client()
-    since_id  = request.session.get('last_tweet_id', 0)
-    tweets, since_id = tf.get_tweets(oauth_client, since_id)
-    request.session['last_tweet_id'] = since_id
+    since_id  = request.GET.get('last_tweet_id', 0)
+    tweets = tf.get_tweets(oauth_client, int(since_id))
     return HttpResponse(json.dumps(tweets), mimetype="application/json")
 
 @login_required    

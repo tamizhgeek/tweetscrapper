@@ -23,23 +23,19 @@ class TwitterInfo(models.Model):
                 "http://api.twitter.com/1/statuses/user_timeline.json?count=10&include_rts=1")
         else:
             resp, res = client.request(
-                "http://api.twitter.com/1/statuses/user_timeline.json?count=10&include_rts=1&max_id=%d"%since_id)
-        try:
-            status = 'Success'
-        except: #This JSON error happens at random. So this try block. Should find the root cause and fix this.
-            status = 'Failure'
-            
-        if json.loads(resp['status']) != 200: #If the API gets down or something weird happens at network side
-            status = 'Failure'
-        else:
+                "http://api.twitter.com/1/statuses/user_timeline.json?count=11&include_rts=1&max_id=%d"%since_id)
+
+        if json.loads(resp['status']) == 200: #If the API gets down or something weird happens at network side
             res = json.loads(res)
-            since_id = res[-1]['id']
-            
+            if since_id != 0:
+                res.pop(0)  # Removing the first element, as it would be a repitition
+
         result = self.accumulate_tweets(res)
-        return result, since_id
+        return result
 
     def accumulate_tweets(self, input):
         result = []
+
         for entry in input:
             result.append({ 'text' : unicode(entry['text']), 'tweet_id' : entry['id']})
         return result
